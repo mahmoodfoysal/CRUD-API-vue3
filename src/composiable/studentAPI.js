@@ -50,12 +50,34 @@ export default function useStudent() {
         catch(err) {
             error.value = err.message;
         }
-    } 
+    }
+    
+    // update student data 
+    const updateStudent = async (id, data) => {
+        studentData.value = [];
+        error.value = null;
+        try {
+            const config = {
+                method: 'PUT',
+                url: url + id,
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                data: JSON.stringify(data)
+            }
+            const res = await axios(config);
+            studentData.value = res.data;
+        }
+        catch(err) {
+            error.value = err.message;
+        }
+    }
 
     return {
         getAllStudentData,
         getSingleStudent,
         createStudent,
+        updateStudent,
         studentData,
         error
     }

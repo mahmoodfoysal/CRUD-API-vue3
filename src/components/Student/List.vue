@@ -55,7 +55,7 @@ const handleDeleteStudent = async (id) => {
                         <router-link :to="{name: 'Views', params: {id: data.id}}">
                             <EyeIcon class="text-blue-500 h-6 w-6 inline cursor-pointer"></EyeIcon>
                         </router-link>
-                        <router-link :to="{name: 'Edit', params: {id: 1}}">
+                        <router-link :to="{name: 'Edit', params: {id: data.id}}">
                             <PencilIcon class="text-emeraid-500 h-6 w-6 mx-6 inline cursor-pointer"></PencilIcon>
                         </router-link>
                         <TrashIcon @click="handleDeleteStudent(1)" class="text-red-500 h-6 w-6 inline cursor-pointer"></TrashIcon>

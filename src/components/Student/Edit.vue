@@ -1,6 +1,17 @@
 <script setup>
+import useStudent from '../../composiable/studentAPI.js'
+import { onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+
+const {getSingleStudent, updateStudent, studentData, error} = useStudent();
+onMounted(() => {
+    getSingleStudent(route.params.id);
+})
+
 const handleUpdateStudentForm = () => {
-    console.log('Click')
+    updateStudent(route.params.id, studentData.value)
 }
 </script>
 
@@ -18,7 +29,9 @@ const handleUpdateStudentForm = () => {
                     <label class="font-medium" for="stuid"> ID : </label>
                 </div>
                 <div class="w-4/5">
-                    <input type="text" id="stuid" class="border-2 border-gray-200 w-full py-2 px-4" readonly disabled
+                    <input
+                    v-model.trim="studentData.id"
+                    type="text" id="stuid" class="border-2 border-gray-200 w-full py-2 px-4" readonly disabled
                          />
                 </div>
             </div>
@@ -27,7 +40,9 @@ const handleUpdateStudentForm = () => {
                     <label class="font-medium" for="stuname"> Name : </label>
                 </div>
                 <div class="w-4/5">
-                    <input type="text" id="stuname" class="border-2 border-gray-200 w-full py-2 px-4" required
+                    <input 
+                    v-model.trim="studentData.stuname"
+                    type="text" id="stuname" class="border-2 border-gray-200 w-full py-2 px-4" required
                          />
                 </div>
             </div>
@@ -36,7 +51,9 @@ const handleUpdateStudentForm = () => {
                     <label class="font-medium" for="email"> Email : </label>
                 </div>
                 <div class="w-4/5">
-                    <input type="email" id="email" class="border-2 border-gray-200 w-full py-2 px-4" required
+                    <input 
+                    v-model.trim="studentData.email"
+                    type="email" id="email" class="border-2 border-gray-200 w-full py-2 px-4" required
                          />
                 </div>
             </div>
@@ -55,7 +72,7 @@ const handleUpdateStudentForm = () => {
         </form>
 
         <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg font-medium" role="alert">
-            Student Updated Successfully
+            
         </div>
     </div>
 </template>
