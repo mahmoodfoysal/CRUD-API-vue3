@@ -73,10 +73,31 @@ export default function useStudent() {
         }
     }
 
+    // delete student data 
+    const deleteStudent = async (id) => {
+        studentData.value = [];
+        error.value = null;
+        try {
+            const config = {
+                method: 'DELETE',
+                url: url + id,
+                headers: {
+                    'Content-type': 'application/json'
+                },
+            }
+            const res = await axios(config);
+            studentData.value = res.data;
+        }
+        catch(err) {
+            error.value = err.message;
+        }
+    }
+
     return {
         getAllStudentData,
         getSingleStudent,
         createStudent,
+        deleteStudent,
         updateStudent,
         studentData,
         error

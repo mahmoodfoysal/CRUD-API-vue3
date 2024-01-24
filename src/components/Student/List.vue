@@ -9,7 +9,7 @@ import {
 import useStudent from '../../composiable/studentAPI.js';
 import { onMounted } from 'vue';
 
-const {getAllStudentData, studentData, error} = useStudent();
+const {getAllStudentData, deleteStudent, studentData, error} = useStudent();
 onMounted(getAllStudentData);
 
 const handleDeleteStudent = async (id) => {
@@ -18,7 +18,8 @@ const handleDeleteStudent = async (id) => {
 
     }
     else {
-        console.log("Deleted ID", id);
+        await deleteStudent(id);
+        await getAllStudentData();
     }
 }
 </script>
@@ -58,7 +59,7 @@ const handleDeleteStudent = async (id) => {
                         <router-link :to="{name: 'Edit', params: {id: data.id}}">
                             <PencilIcon class="text-emeraid-500 h-6 w-6 mx-6 inline cursor-pointer"></PencilIcon>
                         </router-link>
-                        <TrashIcon @click="handleDeleteStudent(1)" class="text-red-500 h-6 w-6 inline cursor-pointer"></TrashIcon>
+                        <TrashIcon @click="handleDeleteStudent(data.id)" class="text-red-500 h-6 w-6 inline cursor-pointer"></TrashIcon>
                     </td>
                 </tr>
             </tbody>
