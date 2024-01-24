@@ -1,5 +1,15 @@
 <script setup>
+import useStudent from '../../composiable/studentAPI.js';
+import { onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 
+const {getSingleStudent, studentData, error} = useStudent();
+const route = useRoute();
+console.log(route.params.id)
+
+onMounted(()=> {
+  getSingleStudent(route.params.id)
+})
 </script>
 
 <template>
@@ -21,9 +31,9 @@
       </thead>
       <tbody class="text-center">
         <tr>
-          <td class="py-2">dada</td>
-          <td class="py-2">afaf</td>
-          <td class="py-2">adad</td>
+          <td class="py-2">{{ studentData.id }}</td>
+          <td class="py-2">{{ studentData.stuname }}</td>
+          <td class="py-2">{{ studentData.email }}</td>
         </tr>
       </tbody>
     </table>

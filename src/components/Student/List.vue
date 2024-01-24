@@ -52,7 +52,7 @@ const handleDeleteStudent = async (id) => {
                     <td class="py-2">{{ data.stuname }}</td>
                     <td class="py-2">{{ data.email }}</td>
                     <td class="py-2">
-                        <router-link :to="{name: 'Views', params: {id: 1}}">
+                        <router-link :to="{name: 'Views', params: {id: data.id}}">
                             <EyeIcon class="text-blue-500 h-6 w-6 inline cursor-pointer"></EyeIcon>
                         </router-link>
                         <router-link :to="{name: 'Edit', params: {id: 1}}">
