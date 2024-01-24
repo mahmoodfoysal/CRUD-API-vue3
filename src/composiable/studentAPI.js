@@ -27,12 +27,35 @@ export default function useStudent() {
             studentData.value = res.data
         }
         catch (err){
-            error.value = err.message
+            error.value = err.message;
         }
     }
+
+    // post student data 
+    const createStudent = async (formData) => {
+        studentData.value = [];
+        error.value = null;
+        try {
+            const config = {
+                method: 'POST',
+                url: url,
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                data: JSON.stringify(formData)
+            }
+            const res = await axios(config);
+            studentData.value = res.data;
+        }
+        catch(err) {
+            error.value = err.message;
+        }
+    } 
+
     return {
         getAllStudentData,
         getSingleStudent,
+        createStudent,
         studentData,
         error
     }

@@ -1,12 +1,17 @@
 <script setup>
 import { reactive } from 'vue';
 const formData = reactive({
-    stuName: '',
+    stuname: '',
     email: '',
 });
 
+import useStudent from '@/composiable/studentAPI';
+import {onMounted} from 'vue';
+
+const {createStudent, error, studentData} = useStudent();
+
 const handleAddStudentForm = async () => {
-    console.log("Form Submitted", formData)
+    await createStudent(formData);
 }
 </script>
 
@@ -25,7 +30,7 @@ const handleAddStudentForm = async () => {
                 </div>
                 <div class="w-4/5">
                     <input 
-                    v-mdoel.trim="formData.stuName"
+                    v-model.trim="formData.stuname"
                     type="text" id="stuname"
                         class="border-2 border-gray-200 w-full py-2 px-4" placeholder="write your name" required />
                 </div>
