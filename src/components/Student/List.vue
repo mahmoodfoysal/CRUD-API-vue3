@@ -38,7 +38,12 @@ const handleDeleteStudent = async (id) => {
                 </router-link>
             </div>
         </div>
-        <table class="table-auto w-full">
+        <div v-if="error">
+            {{ error.message }}
+        </div>
+        <table 
+        v-else-if="studentData"
+        class="table-auto w-full">
             <thead class="bg-slate-600 text-white">
                 <tr>
                     <th class="py-1">No</th>
