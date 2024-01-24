@@ -4,7 +4,23 @@ import {
     PencilIcon,
     TrashIcon,
     UserPlusIcon
-} from '@heroicons/vue/24/solid'
+} from '@heroicons/vue/24/solid';
+
+import useStudent from '../../composiable/studentAPI.js';
+import { onMounted } from 'vue';
+
+const {getAllStudentData, studentData, error} = useStudent();
+onMounted(getAllStudentData);
+
+const handleDeleteStudent = async (id) => {
+    
+    if(!window.confirm('Are you sure want to delete')) {
+
+    }
+    else {
+        console.log("Deleted ID", id);
+    }
+}
 </script>
 
 <template>
@@ -31,14 +47,18 @@ import {
                 </tr>
             </thead>
             <tbody class="text-center">
-                <tr v-for="n in 5">
-                    <td class="py-2">1</td>
-                    <td class="py-2">Sonam</td>
-                    <td class="py-2">sonam@gmail.com</td>
+                <tr v-for="(data, index) in studentData" :key="index">
+                    <td class="py-2">{{ ++index }}</td>
+                    <td class="py-2">{{ data.stuname }}</td>
+                    <td class="py-2">{{ data.email }}</td>
                     <td class="py-2">
-                        <EyeIcon class="text-blue-500 h-6 w-6 inline cursor-pointer"></EyeIcon>
-                        <PencilIcon class="text-emeraid-500 h-6 w-6 mx-6 inline cursor-pointer"></PencilIcon>
-                        <TrashIcon class="text-red-500 h-6 w-6 inline cursor-pointer"></TrashIcon>
+                        <router-link :to="{name: 'Views', params: {id: 1}}">
+                            <EyeIcon class="text-blue-500 h-6 w-6 inline cursor-pointer"></EyeIcon>
+                        </router-link>
+                        <router-link :to="{name: 'Edit', params: {id: 1}}">
+                            <PencilIcon class="text-emeraid-500 h-6 w-6 mx-6 inline cursor-pointer"></PencilIcon>
+                        </router-link>
+                        <TrashIcon @click="handleDeleteStudent(1)" class="text-red-500 h-6 w-6 inline cursor-pointer"></TrashIcon>
                     </td>
                 </tr>
             </tbody>

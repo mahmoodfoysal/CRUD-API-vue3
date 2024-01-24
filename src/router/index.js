@@ -18,6 +18,11 @@ const routes = [
         component: Add
     },
     {
+        path: '/edit/:id',
+        name: 'Edit',
+        component: Edit
+    },
+    {
         path: '/view/:id',
         name: 'Views',
         component: Views
